@@ -11,6 +11,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        filled: "var(--filled)",
+        hover: "var(--hover)",
+        error: "var(--error)",
+        bgColor: "var(--bg-color)",
+        textColor: "var(--text-color)",
       },
     },
   },
