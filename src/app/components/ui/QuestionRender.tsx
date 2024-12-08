@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import useDispatch from "@/app/hooks/useDispatch";
-import Icons from "../Icons";
+import Icons, { IconName } from "../Icons";
 import Button from "./Button";
-import CustomDatePicker from "./DatePicker";
 import { ACTION_TYPES } from "@/app/context/reducer";
+import SelectedQuestionDropDown from "../SelectedQuestionDropDown";
 
 enum QuestionType {
   ShortAnswer = "shortAnswer",
@@ -51,17 +51,24 @@ const QuestionRender: React.FC<IQuestionRender> = ({
 
   return (
     <div className="border flex flex-col gap-1 rounded-2xl p-4 hover:bg-gray-50">
-      <input
-        type="text"
-        placeholder="Write a question"
-        className="text-sm font-semibold text-black"
-      />
-      <input
-        type="text"
-        placeholder="Write a help text or caption (leave empty if needed)."
-        className="text-xs font-normal"
-      />
-
+      <div className=" flex flex-row items-center justify-between">
+        <div className=" flex flex-col gap-1">
+          <input
+            type="text"
+            placeholder="Write a question"
+            className="text-sm font-semibold text-black"
+          />
+          <input
+            type="text"
+            placeholder="Write a help text or caption (leave empty if needed)."
+            className="text-xs font-normal"
+          />
+        </div>
+        <SelectedQuestionDropDown
+          selectedIconName={`${type}Icon`}
+          index={index}
+        />
+      </div>
       {type === QuestionType.SingleSelect ? (
         <>
           {options.map((_, i) => (

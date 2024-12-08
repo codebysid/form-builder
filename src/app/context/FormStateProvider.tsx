@@ -5,6 +5,7 @@ import { reducer } from "./reducer";
 export interface IState {
   isDropDownOpen: boolean;
   formElements: { type: string; options?: string[] }[];
+  isQuestionDropDownOpen: { isOpen: boolean; activeQuestionIndex?: number };
 }
 
 export interface IContextState {
@@ -21,6 +22,7 @@ const FormStateProvider = ({ children }: IFormStateProvider) => {
   const [state, dispatch] = useReducer(reducer, {
     isDropDownOpen: false,
     formElements: [{ type: null }],
+    isQuestionDropDownOpen: { isOpen: false },
   });
 
   return (

@@ -4,6 +4,7 @@ export const ACTION_TYPES = {
   UPDATE_DROPDOWN_VISIBILITY: "updateDropDownVisibility",
   ADD_FORM_ELEMENTS: "addFormElements",
   ADD_OPTIONS: "addOptions",
+  UPDATE_QUESTION_DROPDOWN_VISIBILITY: "updateQuestionDropDownVisibility",
 };
 
 export function reducer(state: IState, action: { type: string; payload: any }) {
@@ -31,6 +32,15 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
 
       console.log({ newFormElements });
       return { ...state, formElements: newFormElements };
+    }
+    case ACTION_TYPES.UPDATE_QUESTION_DROPDOWN_VISIBILITY: {
+      return {
+        ...state,
+        isQuestionDropDownOpen: {
+          isOpen: !state.isQuestionDropDownOpen.isOpen,
+          activeQuestionIndex: action.payload.index,
+        },
+      };
     }
     default:
       return state;
