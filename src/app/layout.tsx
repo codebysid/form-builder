@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import FormStateProvider from "./context/FormStateProvider";
+import { DragEndEvent } from "@dnd-kit/core";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,9 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <FormStateProvider>
-          {children}
-        </FormStateProvider>
+        <FormStateProvider>{children}</FormStateProvider>
       </body>
     </html>
   );

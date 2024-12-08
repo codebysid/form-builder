@@ -1,11 +1,13 @@
 import React, { memo } from "react";
 import useDispatch from "@/app/hooks/useDispatch";
-import Icons, { IconName } from "../Icons";
+import Icons from "../Icons";
 import Button from "./Button";
 import { ACTION_TYPES } from "@/app/context/reducer";
 import SelectedQuestionDropDown from "../SelectedQuestionDropDown";
+import { useSortable } from "@dnd-kit/sortable";
+import { useDraggable } from "@dnd-kit/core";
 
-enum QuestionType {
+export enum QuestionType {
   ShortAnswer = "shortAnswer",
   Number = "number",
   Url = "url",
@@ -26,6 +28,10 @@ const QuestionRender: React.FC<IQuestionRender> = ({
   index,
 }) => {
   const dispatch = useDispatch();
+  const { transform } = useDraggable({ id: index });
+  const { listeners, setNodeRef, attributes } = useSortable({
+    id: index,
+  });
   if (!type) return;
   const handleAddOptions = () => {
     if (!dispatch) return;
@@ -48,9 +54,21 @@ const QuestionRender: React.FC<IQuestionRender> = ({
         return "";
     }
   };
+  const style = transform
+    ? {
+        transform: `translate(${transform.x}px, ${transform.y}px)`,
+      }
+    : undefined;
 
+  console.log({ transform, style });
   return (
-    <div className="border flex flex-col gap-1 rounded-2xl p-4 hover:bg-gray-50">
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      style={style}
+      className="border flex flex-col gap-1 rounded-2xl p-4 hover:bg-gray-50"
+    >
       <div className=" flex flex-row items-center justify-between">
         <div className=" flex flex-col gap-1">
           <input

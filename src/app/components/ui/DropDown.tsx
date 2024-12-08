@@ -1,4 +1,4 @@
-import useDropDownAction from "@/app/hooks/useDropDownAction";
+import useCtxState from "@/app/hooks/useCtxState";
 import QuestionDropDownOption from "../QuestionDropDownOption";
 
 interface IDropDown {
@@ -8,10 +8,8 @@ interface IDropDown {
 }
 
 const DropDown = ({ options, label, onlyIcon = false }: IDropDown) => {
-  const handleVisibility = useDropDownAction({
-    id: label.split(" ").join("_"),
-  });
-  console.log(label.split(" ").join("_"));
+  const state = useCtxState();
+
   return (
     <>
       {!onlyIcon && (
@@ -24,9 +22,12 @@ const DropDown = ({ options, label, onlyIcon = false }: IDropDown) => {
           return (
             <QuestionDropDownOption
               key={ques.id}
-              title={!onlyIcon ? ques.title : ""}
+              title={ques.title}
+              onlyIcon={onlyIcon}
               iconName={ques.iconName}
-              handleVisibility={handleVisibility}
+              handleVisibility={
+                state?.dropDownActions[label.split(" ").join("_")]
+              }
             />
           );
         })}

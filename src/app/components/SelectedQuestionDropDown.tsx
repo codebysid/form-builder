@@ -23,6 +23,7 @@ const SelectedQuestionDropDown = ({
       payload: { index },
     });
   };
+
   return (
     <div className=" w-fit relative">
       <span
@@ -31,10 +32,11 @@ const SelectedQuestionDropDown = ({
       >
         <Icons name={selectedIconName as IconName} />
         <Icons name="downArrowIcon" />
+        <Icons name="dragIcon" />
       </span>
       {state?.isQuestionDropDownOpen.isOpen &&
         state.isQuestionDropDownOpen.activeQuestionIndex === index && (
-          <div className=" absolute bg-white p-1 border rounded-xl">
+          <div className=" absolute z-20 bg-white p-1 border rounded-xl">
             <DropDown
               options={questionTypes}
               label="selected question"

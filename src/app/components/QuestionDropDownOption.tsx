@@ -1,27 +1,33 @@
 import React from "react";
 import Icons, { IconName } from "./Icons";
-import useDispatch from "../hooks/useDispatch";
-import { ACTION_TYPES } from "../context/reducer";
+import useCtxState from "../hooks/useCtxState";
 
 interface IQuestionCard {
   title: string;
   iconName?: string;
-  handleVisibility: () => void;
+  handleVisibility?: (title: string, index: number) => void;
+  onlyIcon: boolean;
 }
 const QuestionDropDownOption = ({
   title,
   iconName,
   handleVisibility,
+  onlyIcon,
 }: IQuestionCard) => {
-  const dispatch = useDispatch();
-
+  const state = useCtxState();
   return (
     <div
-      onClick={handleVisibility}
+      onClick={() =>
+        handleVisibility &&
+        handleVisibility(
+          title,
+          state?.isQuestionDropDownOpen.activeQuestionIndex as number
+        )
+      }
       className=" flex flex-row items-center gap-2"
     >
       {<Icons name={iconName as IconName} />}
-      <p className=" text-sm font-medium">{title}</p>
+      {!onlyIcon && <p className=" text-sm font-medium">{title}</p>}
     </div>
   );
 };

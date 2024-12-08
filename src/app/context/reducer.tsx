@@ -5,6 +5,7 @@ export const ACTION_TYPES = {
   ADD_FORM_ELEMENTS: "addFormElements",
   ADD_OPTIONS: "addOptions",
   UPDATE_QUESTION_DROPDOWN_VISIBILITY: "updateQuestionDropDownVisibility",
+  DRAG_AND_DROP: "dragAndDrop",
 };
 
 export function reducer(state: IState, action: { type: string; payload: any }) {
@@ -14,10 +15,21 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
       return { ...state, isDropDownOpen: !state.isDropDownOpen };
     }
     case ACTION_TYPES.ADD_FORM_ELEMENTS: {
-      return {
-        ...state,
-        formElements: [...state.formElements, action.payload],
-      };
+      const index = action.payload.index;
+      if (index === undefined || index === null)
+        return {
+          ...state,
+          formElements: [...state.formElements, action.payload],
+        };
+
+      const newFormElements = state.formElements.map((ele, i) => {
+        console.log("checking index in adding form elements", { index, i });
+        if (i === index) {
+          return action.payload;
+        }
+        return ele;
+      });
+      return { ...state, formElements: newFormElements };
     }
     case ACTION_TYPES.ADD_OPTIONS: {
       const newFormElements = state.formElements.map((ele, i) => {
@@ -41,6 +53,13 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
           activeQuestionIndex: action.payload.index,
         },
       };
+    }
+    case ACTION_TYPES.DRAG_AND_DROP: {
+      const { oldIndex, newIndex } = action.payload;
+      const updatedElements = [...state.formElements];
+      const [movedItem] = updatedElements.splice(oldIndex, 1);
+      updatedElements.splice(newIndex, 0, movedItem);
+      return { ...state, formElements: updatedElements };
     }
     default:
       return state;
