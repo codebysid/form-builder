@@ -9,13 +9,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        filled: "var(--filled)",
-        hover: "var(--hover)",
-        error: "var(--error)",
-        bgColor: "var(--bg-color)",
-        textColor: "var(--text-color)",
+        xGreen: "rgba(var(--green))",
+        xDarkGreen: "rgba(var(--darkGreen))",
+        xGray: "rgba(var(--xGray))",
       },
     },
   },

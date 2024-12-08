@@ -2,10 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.theme {
-  --error: 235, 87, 87;
-  --hover: 250, 251, 252;
-  --filled: 13, 13, 13;
-  --bg-color: 255, 255, 255;
-  --text-color: 13, 13, 13;
+.light {
+  --green: 0, 170, 69;
+  --xDarkGreen: 30, 135, 75;
+  --xGray: 106, 115, 125;
 }
