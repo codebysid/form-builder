@@ -1,13 +1,22 @@
 "use client";
-import { useState } from "react";
 import Button from "./ui/Button";
 import Icons from "./Icons";
 import QuestionTypesDropDown from "./QuestionTypesDropDown";
+import useCtxState from "../hooks/useCtxState";
+import useDispatch from "../hooks/useDispatch";
+import { ACTION_TYPES } from "../context/reducer";
+import { useEffect } from "react";
 
 const CreateForm = () => {
-  const [isQuestionTypeOpen, setIsQuestionTypeOpen] = useState<boolean>(false);
-
-  const handleDropDownVisibility = () => setIsQuestionTypeOpen((prev) => !prev);
+  const state = useCtxState()
+  const dispatch = useDispatch()
+  const handleDropDownVisibility = () => {
+    console.log("dropdown trigger", ACTION_TYPES.UPDATE_DROPDOWN_VISIBILITY)
+    dispatch && dispatch({ type: ACTION_TYPES.UPDATE_DROPDOWN_VISIBILITY });
+  }
+  useEffect(() => {
+    console.log({ state })
+  }, [state])
 
   return (
     <div className=" flex flex-col justify-center items-center w-[95vw]">
@@ -30,7 +39,7 @@ const CreateForm = () => {
         >
           Add Question
         </Button>
-        {isQuestionTypeOpen && <QuestionTypesDropDown setVi />}
+        {state?.isDropDownOpen && <QuestionTypesDropDown />}
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+"use client"
 import { createContext, Dispatch, ReactNode, useReducer } from "react"
 import { reducer } from "./reducer"
 
@@ -10,7 +11,7 @@ export interface IContextState {
   dispatch: Dispatch<any>
 }
 
-const FormStateContext = createContext<IContextState | null>(null)
+export const FormStateContext = createContext<IContextState | null>(null)
 
 interface IFormStateProvider {
   children: ReactNode
