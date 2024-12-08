@@ -12,6 +12,8 @@ export default {
         xGreen: "rgba(var(--green))",
         xDarkGreen: "rgba(var(--darkGreen))",
         xGray: "rgba(var(--xGray))",
+        xDarkGray: "rgba(var(--xDarkGray))",
+        xDisable: "rgba(var(--xDisable))",
       },
     },
   },
