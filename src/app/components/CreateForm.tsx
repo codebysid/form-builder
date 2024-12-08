@@ -1,4 +1,5 @@
 import FormBody from "./FormBody";
+import FormFooter from "./FormFooter";
 import FormName from "./FormName";
 
 const CreateForm = () => {
@@ -6,6 +7,7 @@ const CreateForm = () => {
     <div className=" flex flex-col justify-center items-center w-[95vw]">
       <FormName />
       <FormBody />
+      <FormFooter />
     </div>
   );
 };

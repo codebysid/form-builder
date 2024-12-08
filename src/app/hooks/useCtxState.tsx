@@ -1,10 +1,11 @@
-import { useContext } from "react"
-import { FormStateContext } from "../context/FormStateProvider"
+"use client";
+import { useContext } from "react";
+import { FormStateContext } from "../context/FormStateProvider";
 
 const useCtxState = () => {
-  const context = useContext(FormStateContext)
-  if (context?.state) return context.state
-  return null
-}
+  const context = useContext(FormStateContext);
+  if (context?.state) return context.state;
+  return null;
+};
 
-export default useCtxState
+export default useCtxState;

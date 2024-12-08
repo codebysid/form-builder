@@ -60,7 +60,6 @@ const QuestionRender: React.FC<IQuestionRender> = ({
       }
     : undefined;
 
-  console.log({ transform, style });
   return (
     <div
       ref={setNodeRef}

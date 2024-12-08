@@ -1,13 +1,13 @@
-import { useContext } from "react"
-import { FormStateContext } from "../context/FormStateProvider"
+"use client";
+import { useContext } from "react";
+import { FormStateContext } from "../context/FormStateProvider";
 
 const useDispatch = () => {
-  const context = useContext(FormStateContext)
+  const context = useContext(FormStateContext);
 
-  if (!context?.dispatch) return null
+  if (!context?.dispatch) return null;
 
-  return context.dispatch
+  return context.dispatch;
+};
 
-}
-
-export default useDispatch
+export default useDispatch;

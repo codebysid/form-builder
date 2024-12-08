@@ -36,7 +36,7 @@ const SelectedQuestionDropDown = ({
       </span>
       {state?.isQuestionDropDownOpen.isOpen &&
         state.isQuestionDropDownOpen.activeQuestionIndex === index && (
-          <div className=" absolute z-20 bg-white p-1 border rounded-xl">
+          <div className=" absolute z-40 bg-white p-1 border rounded-xl">
             <DropDown
               options={questionTypes}
               label="selected question"

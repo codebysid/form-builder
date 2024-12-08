@@ -1,5 +1,11 @@
 "use client";
-import React, { act, DragEventHandler, useState } from "react";
+import React, {
+  act,
+  DragEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Button from "./ui/Button";
 import Icons from "./Icons";
 import useCtxState from "../hooks/useCtxState";
@@ -63,13 +69,42 @@ const FormBody = () => {
     }
   };
 
+  // useEffect(() => {
+  //   const handlePosition = () => {
+  //     if (buttonRef.current && dropdownRef.current) {
+  //       const buffer = 250;
+  //       const buttonRect = buttonRef.current.getBoundingClientRect();
+  //       const dropdownHeight = dropdownRef.current.offsetHeight;
+  //       const spaceBelow = window.innerHeight - buttonRect.bottom;
+  //       const spaceAbove = buttonRect.top;
+
+  //       const effectiveSpaceBelow = spaceBelow - buffer;
+  //       const effectiveSpaceAbove = spaceAbove - buffer;
+
+  //       setIsAbove(
+  //         effectiveSpaceBelow < dropdownHeight &&
+  //           effectiveSpaceAbove >= dropdownHeight
+  //       );
+  //     }
+  //   };
+
+  //   handlePosition();
+  //   window.addEventListener("resize", handlePosition);
+
+  //   return () => {
+  //     window.removeEventListener("resize", handlePosition);
+  //   };
+  // }, []);
+  // useEffect(() => {
+  //   console.log({ isAbove });
+  // }, [isAbove]);
   return (
     <DndContext
       sensors={sensors}
       onDragEnd={handleDragEnd}
       collisionDetection={closestCorners}
     >
-      <div className="border border-gray-200 w-2/5 min-h-[93vh] flex justify-center ">
+      <div className="border border-gray-200 w-2/5 h-[83vh] overflow-y-auto flex justify-center ">
         <div className=" flex flex-col items-center justify-start w-full">
           <div className=" w-full p-4 flex flex-col gap-4">
             <SortableContext

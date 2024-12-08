@@ -6,10 +6,10 @@ export const ACTION_TYPES = {
   ADD_OPTIONS: "addOptions",
   UPDATE_QUESTION_DROPDOWN_VISIBILITY: "updateQuestionDropDownVisibility",
   DRAG_AND_DROP: "dragAndDrop",
+  FORM_NAME: "formName",
 };
 
 export function reducer(state: IState, action: { type: string; payload: any }) {
-  // console.log("reducer", state, action)
   switch (action.type) {
     case ACTION_TYPES.UPDATE_DROPDOWN_VISIBILITY: {
       return { ...state, isDropDownOpen: !state.isDropDownOpen };
@@ -60,6 +60,9 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
       const [movedItem] = updatedElements.splice(oldIndex, 1);
       updatedElements.splice(newIndex, 0, movedItem);
       return { ...state, formElements: updatedElements };
+    }
+    case ACTION_TYPES.FORM_NAME: {
+      return { ...state, formName: action.payload.formName };
     }
     default:
       return state;

@@ -10,6 +10,7 @@ export interface IState {
     input_types: (title: string, index: number) => void;
     selected_question: (title: string, index: number) => void;
   };
+  formName: string;
 }
 
 export interface IContextState {
@@ -28,6 +29,7 @@ const FormStateProvider = ({ children }: IFormStateProvider) => {
     isDropDownOpen: false,
     formElements: [],
     isQuestionDropDownOpen: { isOpen: false },
+    formName: "",
     dropDownActions: {
       input_types: function (title: string, index: number) {
         if (!dispatch) return;
