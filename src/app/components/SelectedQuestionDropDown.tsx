@@ -28,7 +28,7 @@ const SelectedQuestionDropDown = ({
     <div className=" w-fit relative">
       <span
         onClick={handleDropDownVisibility}
-        className=" flex flex-row gap-1 items-center "
+        className=" flex flex-row gap-1 items-center text-gray-500"
       >
         <Icons name={selectedIconName as IconName} />
         <Icons name="downArrowIcon" />

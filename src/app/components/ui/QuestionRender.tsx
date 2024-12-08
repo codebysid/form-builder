@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { ChangeEvent, memo } from "react";
 import useDispatch from "@/app/hooks/useDispatch";
 import Icons from "../Icons";
 import Button from "./Button";
@@ -6,6 +6,7 @@ import { ACTION_TYPES } from "@/app/context/reducer";
 import SelectedQuestionDropDown from "../SelectedQuestionDropDown";
 import { useSortable } from "@dnd-kit/sortable";
 import { useDraggable } from "@dnd-kit/core";
+import useCtxState from "@/app/hooks/useCtxState";
 
 export enum QuestionType {
   ShortAnswer = "shortAnswer",
@@ -28,10 +29,12 @@ const QuestionRender: React.FC<IQuestionRender> = ({
   index,
 }) => {
   const dispatch = useDispatch();
+  const state = useCtxState();
   const { transform } = useDraggable({ id: index });
   const { listeners, setNodeRef, attributes } = useSortable({
     id: index,
   });
+
   if (!type) return;
   const handleAddOptions = () => {
     if (!dispatch) return;
@@ -59,6 +62,25 @@ const QuestionRender: React.FC<IQuestionRender> = ({
         transform: `translate(${transform.x}px, ${transform.y}px)`,
       }
     : undefined;
+  const handleQuestionAndDescChange = (e: ChangeEvent<HTMLDivElement>) => {
+    if (!dispatch) return;
+    const input = e.target as HTMLInputElement;
+    dispatch({
+      type: ACTION_TYPES.ENTER_QUESTION_AND_DESCRIPTION,
+      payload: { index, [input.name]: input.value },
+    });
+  };
+
+  const handleOptionChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    optionIndex: number
+  ) => {
+    if (!dispatch) return;
+    dispatch({
+      type: ACTION_TYPES.ENTER_OPTIONS,
+      payload: { index, optionIndex, optionValue: e.target.value },
+    });
+  };
 
   return (
     <div
@@ -69,16 +91,23 @@ const QuestionRender: React.FC<IQuestionRender> = ({
       className="border flex flex-col gap-1 rounded-2xl p-4 hover:bg-gray-50"
     >
       <div className=" flex flex-row items-center justify-between">
-        <div className=" flex flex-col gap-1">
+        <div
+          className=" flex flex-col gap-1"
+          onChange={handleQuestionAndDescChange}
+        >
           <input
             type="text"
+            value={state?.formElements[index].question}
             placeholder="Write a question"
             className="text-sm font-semibold text-black"
+            name="question"
           />
           <input
             type="text"
             placeholder="Write a help text or caption (leave empty if needed)."
+            value={state?.formElements[index].questionDescription}
             className="text-xs font-normal"
+            name="description"
           />
         </div>
         <SelectedQuestionDropDown
@@ -95,6 +124,11 @@ const QuestionRender: React.FC<IQuestionRender> = ({
                 <input
                   placeholder={`Option ${i + 1}`}
                   className={`${getInputStyles(type)} text-sm`}
+                  value={
+                    state?.formElements[index].options &&
+                    state?.formElements[index]?.options[i].trim()
+                  }
+                  onChange={(e) => handleOptionChange(e, i)}
                 />
               </div>
               {i === options.length - 1 && (

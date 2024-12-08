@@ -4,7 +4,12 @@ import { ACTION_TYPES, reducer } from "./reducer";
 
 export interface IState {
   isDropDownOpen: boolean;
-  formElements: { type: string; options?: string[] }[];
+  formElements: {
+    type: string;
+    options?: string[];
+    question: string;
+    questionDescription?: string;
+  }[];
   isQuestionDropDownOpen: { isOpen: boolean; activeQuestionIndex?: number };
   dropDownActions: {
     input_types: (title: string, index: number) => void;

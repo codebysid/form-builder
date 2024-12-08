@@ -7,6 +7,8 @@ export const ACTION_TYPES = {
   UPDATE_QUESTION_DROPDOWN_VISIBILITY: "updateQuestionDropDownVisibility",
   DRAG_AND_DROP: "dragAndDrop",
   FORM_NAME: "formName",
+  ENTER_QUESTION_AND_DESCRIPTION: "enterQuestionAndDescription",
+  ENTER_OPTIONS: "enterOptions",
 };
 
 export function reducer(state: IState, action: { type: string; payload: any }) {
@@ -63,6 +65,39 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
     }
     case ACTION_TYPES.FORM_NAME: {
       return { ...state, formName: action.payload.formName };
+    }
+    case ACTION_TYPES.ENTER_QUESTION_AND_DESCRIPTION: {
+      const newFormElements = state.formElements.map((ele, i) => {
+        if (i === action.payload.index) {
+          return {
+            ...ele,
+            ...(action.payload.question && {
+              question: action.payload.question,
+            }),
+            ...(action.payload.description && {
+              description: action.payload.description,
+            }),
+          };
+        }
+        return ele;
+      });
+      console.log({ newFormElements });
+      return { ...state, formElements: newFormElements };
+    }
+    case ACTION_TYPES.ENTER_OPTIONS: {
+      const newFormElements = state.formElements.map((ele, i) => {
+        if (i === action.payload.index) {
+          const newOptions = [...(ele.options || [])];
+          newOptions[action.payload.optionIndex] = action.payload.optionValue;
+          return {
+            ...ele,
+            options: newOptions,
+          };
+        }
+        return ele;
+      });
+      console.log({ newFormElements });
+      return { ...state, formElements: newFormElements };
     }
     default:
       return state;
