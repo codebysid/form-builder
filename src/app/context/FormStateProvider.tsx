@@ -55,8 +55,6 @@ const FormStateProvider = ({ children }: IFormStateProvider) => {
           },
         };
 
-        console.log({ questionPayload });
-
         dispatch(questionPayload);
         dispatch({
           type: ACTION_TYPES.UPDATE_DROPDOWN_VISIBILITY,
@@ -81,8 +79,6 @@ const FormStateProvider = ({ children }: IFormStateProvider) => {
             description: "",
           },
         };
-
-        console.log({ questionPayload });
 
         dispatch(questionPayload);
         dispatch({

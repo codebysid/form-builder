@@ -26,7 +26,6 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
         };
 
       const newFormElements = state.formElements.map((ele, i) => {
-        console.log("checking index in adding form elements", { index, i });
         if (i === index) {
           return action.payload;
         }
@@ -45,7 +44,6 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
         return ele;
       });
 
-      console.log({ newFormElements });
       return { ...state, formElements: newFormElements };
     }
     case ACTION_TYPES.UPDATE_QUESTION_DROPDOWN_VISIBILITY: {
@@ -72,17 +70,20 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
         if (i === action.payload.index) {
           return {
             ...ele,
-            ...(action.payload.question && {
-              question: action.payload.question,
-            }),
-            ...(action.payload.description && {
-              description: action.payload.description,
-            }),
+            ...(action.payload.question
+              ? {
+                  question: action.payload.question,
+                }
+              : { question: "" }),
+            ...(action.payload.description
+              ? {
+                  description: action.payload.description,
+                }
+              : { description: "" }),
           };
         }
         return ele;
       });
-      console.log({ newFormElements });
       return { ...state, formElements: newFormElements };
     }
     case ACTION_TYPES.ENTER_OPTIONS: {
@@ -97,7 +98,6 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
         }
         return ele;
       });
-      console.log({ newFormElements });
       return { ...state, formElements: newFormElements };
     }
     case ACTION_TYPES.RESET_FORM_ELEMENTS: {

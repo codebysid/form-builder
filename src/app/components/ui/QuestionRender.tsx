@@ -94,7 +94,7 @@ const QuestionRender: React.FC<IQuestionRender> = ({
         <div className=" flex flex-col gap-1 w-full">
           <input
             type="text"
-            value={state?.formElements[index].question ?? ""}
+            value={state?.formElements[index].question || ""}
             placeholder="Write a question"
             className="outline-none text-sm font-semibold text-black"
             onChange={handleQuestionAndDescChange}

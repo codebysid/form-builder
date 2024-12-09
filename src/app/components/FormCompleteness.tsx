@@ -3,7 +3,6 @@ interface IFormCompleteness {
 }
 const FormCompleteness = ({ completePercentage }: IFormCompleteness) => {
   const progressBarStyle = "w-[" + completePercentage + "%]";
-  console.log({ progressBarStyle });
   return (
     <div className=" flex flex-col gap-1 items-end">
       <p className=" text-xs lg:text-sm font-normal whitespace-nowrap">
