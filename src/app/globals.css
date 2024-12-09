@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .light {
-  --green: 0, 170, 69;
+  --xGreen: 0, 170, 69;
   --xDarkGreen: 30, 135, 75;
   --xGray: 106, 115, 125;
   --xDarkGray: 68, 77, 86;

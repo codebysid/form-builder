@@ -62,12 +62,12 @@ const QuestionRender: React.FC<IQuestionRender> = ({
         transform: `translate(${transform.x}px, ${transform.y}px)`,
       }
     : undefined;
-  const handleQuestionAndDescChange = (e: ChangeEvent<HTMLDivElement>) => {
+  const handleQuestionAndDescChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!dispatch) return;
-    const input = e.target as HTMLInputElement;
+    e.stopPropagation();
     dispatch({
       type: ACTION_TYPES.ENTER_QUESTION_AND_DESCRIPTION,
-      payload: { index, [input.name]: input.value },
+      payload: { index, [e.target.name]: e.target.value },
     });
   };
 
@@ -85,29 +85,28 @@ const QuestionRender: React.FC<IQuestionRender> = ({
   return (
     <div
       ref={setNodeRef}
+      style={style}
       {...attributes}
       {...listeners}
-      style={style}
       className="border flex flex-col gap-1 rounded-2xl p-4 hover:bg-gray-50"
     >
       <div className=" flex flex-row items-center justify-between">
-        <div
-          className=" flex flex-col gap-1"
-          onChange={handleQuestionAndDescChange}
-        >
+        <div className=" flex flex-col gap-1 w-full">
           <input
             type="text"
-            value={state?.formElements[index].question}
+            value={state?.formElements[index].question ?? ""}
             placeholder="Write a question"
-            className="text-sm font-semibold text-black"
+            className="outline-none text-sm font-semibold text-black"
+            onChange={handleQuestionAndDescChange}
             name="question"
           />
           <input
             type="text"
             placeholder="Write a help text or caption (leave empty if needed)."
-            value={state?.formElements[index].questionDescription}
-            className="text-xs font-normal"
+            value={state?.formElements[index].description || ""}
+            className="outline-none text-xs font-normal"
             name="description"
+            onChange={handleQuestionAndDescChange}
           />
         </div>
         <SelectedQuestionDropDown
@@ -123,7 +122,7 @@ const QuestionRender: React.FC<IQuestionRender> = ({
                 <span className="h-4 w-4 rounded-full border-[2px] border-gray-500"></span>
                 <input
                   placeholder={`Option ${i + 1}`}
-                  className={`${getInputStyles(type)} text-sm`}
+                  className={`${getInputStyles(type)} text-sm outline-none`}
                   value={
                     state?.formElements[index].options &&
                     state?.formElements[index]?.options[i].trim()

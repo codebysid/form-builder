@@ -8,7 +8,7 @@ export interface IState {
     type: string;
     options?: string[];
     question: string;
-    questionDescription?: string;
+    description?: string;
   }[];
   isQuestionDropDownOpen: { isOpen: boolean; activeQuestionIndex?: number };
   dropDownActions: {
@@ -49,6 +49,8 @@ const FormStateProvider = ({ children }: IFormStateProvider) => {
           payload: {
             type: questionType.charAt(0).toLowerCase() + questionType.slice(1),
             ...(options && { options }),
+            question: "",
+            description: "",
           },
         };
 
@@ -74,6 +76,8 @@ const FormStateProvider = ({ children }: IFormStateProvider) => {
             type: questionType.charAt(0).toLowerCase() + questionType.slice(1),
             ...(options && { options }),
             index,
+            question: "",
+            description: "",
           },
         };
 
