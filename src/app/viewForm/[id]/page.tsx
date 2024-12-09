@@ -1,9 +1,4 @@
-import { getForm } from "@/actions/form";
-import { ObjectId } from "mongoose";
-import React from "react";
-
-const page = async ({ params }: { params: { id: ObjectId } }) => {
-  const forms = await getForm(params.id);
+const page = () => {
   return <div>page</div>;
 };
 
