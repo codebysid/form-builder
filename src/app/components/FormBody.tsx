@@ -1,11 +1,4 @@
 "use client";
-import React, {
-  act,
-  DragEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
 import Button from "./ui/Button";
 import Icons from "./Icons";
 import useCtxState from "../hooks/useCtxState";
@@ -30,6 +23,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 
+const isMobile = window.matchMedia("(pointer: coarse)").matches;
 const FormBody = () => {
   const state = useCtxState();
   const dispatch = useDispatch();
@@ -39,7 +33,6 @@ const FormBody = () => {
         distance: 10,
       },
     }),
-    useSensor(PointerSensor),
     useSensor(TouchSensor, {
       activationConstraint: {
         delay: 1000,
@@ -48,7 +41,14 @@ const FormBody = () => {
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
+    ...(isMobile
+      ? [
+          useSensor(PointerSensor, {
+            activationConstraint: { delay: 100, tolerance: 200 },
+          }),
+        ]
+      : [])
   );
 
   const handleDropDownVisibility = () => {
