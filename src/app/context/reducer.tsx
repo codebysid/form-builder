@@ -9,6 +9,7 @@ export const ACTION_TYPES = {
   FORM_NAME: "formName",
   ENTER_QUESTION_AND_DESCRIPTION: "enterQuestionAndDescription",
   ENTER_OPTIONS: "enterOptions",
+  RESET_FORM_ELEMENTS: "resetFormElements",
 };
 
 export function reducer(state: IState, action: { type: string; payload: any }) {
@@ -98,6 +99,9 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
       });
       console.log({ newFormElements });
       return { ...state, formElements: newFormElements };
+    }
+    case ACTION_TYPES.RESET_FORM_ELEMENTS: {
+      return { ...state, formElements: [] };
     }
     default:
       return state;

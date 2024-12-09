@@ -19,6 +19,7 @@ import {
   DragEndEvent,
   KeyboardSensor,
   MouseSensor,
+  PointerSensor,
   TouchSensor,
   useSensor,
   useSensors,
@@ -35,13 +36,14 @@ const FormBody = () => {
   const sensors = useSensors(
     useSensor(MouseSensor, {
       activationConstraint: {
-        distance: 8,
+        distance: 10,
       },
     }),
+    useSensor(PointerSensor),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 200,
-        tolerance: 6,
+        delay: 1000,
+        tolerance: 5,
       },
     }),
     useSensor(KeyboardSensor, {
@@ -69,42 +71,13 @@ const FormBody = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const handlePosition = () => {
-  //     if (buttonRef.current && dropdownRef.current) {
-  //       const buffer = 250;
-  //       const buttonRect = buttonRef.current.getBoundingClientRect();
-  //       const dropdownHeight = dropdownRef.current.offsetHeight;
-  //       const spaceBelow = window.innerHeight - buttonRect.bottom;
-  //       const spaceAbove = buttonRect.top;
-
-  //       const effectiveSpaceBelow = spaceBelow - buffer;
-  //       const effectiveSpaceAbove = spaceAbove - buffer;
-
-  //       setIsAbove(
-  //         effectiveSpaceBelow < dropdownHeight &&
-  //           effectiveSpaceAbove >= dropdownHeight
-  //       );
-  //     }
-  //   };
-
-  //   handlePosition();
-  //   window.addEventListener("resize", handlePosition);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handlePosition);
-  //   };
-  // }, []);
-  // useEffect(() => {
-  //   console.log({ isAbove });
-  // }, [isAbove]);
   return (
     <DndContext
       sensors={sensors}
       onDragEnd={handleDragEnd}
       collisionDetection={closestCorners}
     >
-      <div className="border border-gray-200 w-2/5 h-[83vh] overflow-y-auto flex justify-center ">
+      <div className="border border-gray-200 w-10/12 lg:w-2/5 h-[83vh] overflow-y-auto flex justify-center ">
         <div className=" flex flex-col items-center justify-start w-full">
           <div className=" w-full p-4 flex flex-col gap-4">
             <SortableContext

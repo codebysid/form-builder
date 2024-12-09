@@ -12,18 +12,15 @@ const RenderForm = () => {
   const [sampleAnswers, setSampleAnswers] = useState<string[]>([""]);
   const router = useRouter();
   const handleSubmission = () => router.push("/success");
-
-  useEffect(() => {
-    console.log({ sampleAnswers });
-  }, [sampleAnswers]);
+  if (state?.formElements.length === 0) router.push("/");
 
   return (
-    <div className="flex flex-col justify-center items-center w-[95vw]">
+    <div className="flex flex-col justify-center items-center border w-[99vw] lg:w-[95vw]">
       <RenderFormName
         formName={state?.formName}
         sampleAnswers={sampleAnswers}
       />
-      <div className="border border-gray-200 w-2/5 h-[92vh] overflow-y-auto flex flex-col justify-start items-center">
+      <div className="border border-gray-200 w-10/12 lg:w-2/5 h-[92vh] overflow-y-auto flex flex-col justify-start items-center">
         {state?.formElements.map((ele, i) => {
           return (
             <RednderFormElement
@@ -39,11 +36,7 @@ const RenderForm = () => {
           );
         })}
         <div className="w-full flex justify-end items-center pr-4">
-          <Button
-            variant="primary"
-            className="bg-green-500"
-            onClick={handleSubmission}
-          >
+          <Button variant="primary" onClick={handleSubmission}>
             Submit
           </Button>
         </div>

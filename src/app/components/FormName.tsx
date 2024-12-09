@@ -22,7 +22,7 @@ const FormName = () => {
     router.push("/renderForm");
   };
   return (
-    <div className="border border-gray-200 border-b-transparent flex flex-row justify-between items-center w-2/5 h-[56px] px-5">
+    <div className="border border-gray-200 border-b-transparent flex flex-row justify-between items-center w-10/12 lg:w-2/5 h-[56px] px-5">
       <input
         placeholder="Untitled Form"
         type="text"

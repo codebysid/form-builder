@@ -4,7 +4,7 @@ import FormName from "./FormName";
 
 const CreateForm = () => {
   return (
-    <div className=" flex flex-col justify-center items-center w-[95vw]">
+    <div className=" flex flex-col justify-center items-center w-[100vw] lg:w-[95vw]">
       <FormName />
       <FormBody />
       <FormFooter />

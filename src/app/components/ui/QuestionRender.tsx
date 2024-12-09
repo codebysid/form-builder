@@ -88,9 +88,9 @@ const QuestionRender: React.FC<IQuestionRender> = ({
       style={style}
       {...attributes}
       {...listeners}
-      className="border flex flex-col gap-1 rounded-2xl p-4 hover:bg-gray-50"
+      className="border flex flex-col gap-1 rounded-2xl p-4 hover:bg-gray-50 touch-none"
     >
-      <div className=" flex flex-row items-center justify-between">
+      <div className=" flex flex-col-reverse gap-1 lg:flex-row items-start lg:items-center justify-between">
         <div className=" flex flex-col gap-1 w-full">
           <input
             type="text"
