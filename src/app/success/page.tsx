@@ -1,11 +1,12 @@
 import React from "react";
 import Button from "../components/ui/Button";
+import GenerateMoreFormsBtn from "../components/GenerateMoreFormsBtn";
 
 const page = () => {
   return (
-    <div>
-      <h1>Your response has been submited</h1>
-      <Button variant="primary">Generate Forms</Button>
+    <div className="flex flex-col gap-2 justify-center items-center w-[95vw] min-h-screen border">
+      <h1 className=" text-xl font-bold">Your response has been submited 🥳</h1>
+      <GenerateMoreFormsBtn />
     </div>
   );
 };

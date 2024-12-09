@@ -2,6 +2,10 @@
 import { createContext, Dispatch, ReactNode, useReducer } from "react";
 import { ACTION_TYPES, reducer } from "./reducer";
 
+export type Handlers = {
+  input_types: (title: string, index: number) => void;
+  selected_question: (title: string, index: number) => void;
+};
 export interface IState {
   isDropDownOpen: boolean;
   formElements: {
@@ -11,10 +15,7 @@ export interface IState {
     description?: string;
   }[];
   isQuestionDropDownOpen: { isOpen: boolean; activeQuestionIndex?: number };
-  dropDownActions: {
-    input_types: (title: string, index: number) => void;
-    selected_question: (title: string, index: number) => void;
-  };
+  dropDownActions: Handlers;
   formName: string;
 }
 

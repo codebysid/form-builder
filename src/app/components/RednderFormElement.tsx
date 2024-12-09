@@ -55,7 +55,7 @@ const RednderFormElement = ({
           {options?.map((option, i) => (
             <label
               key={i}
-              className="flex flex-row items-center space-x-2 cursor-pointer"
+              className="flex flex-row items-center  cursor-pointer"
             >
               <input
                 type="radio"
@@ -64,7 +64,7 @@ const RednderFormElement = ({
                 onChange={(e) => handleAnswers(e)}
               />
               <span
-                className="relative w-4 h-4 rounded-full border-[2px] peer-checked:border-green-500 
+                className="relative w-4 h-4 rounded-full border-[2px] peer-checked:border-green-700 
               peer-checked:after:absolute
               peer-checked:after:top-[50%]
               peer-checked:after:left-[50%]
@@ -72,7 +72,7 @@ const RednderFormElement = ({
               peer-checked:after:-translate-y-[50%]
               peer-checked:after:w-[6px] peer-checked:after:h-[6px] peer-checked:after:rounded-full peer-checked:after:bg-green-500"
               ></span>
-              <span className=" text-sm font-medium">
+              <span className=" text-sm font-medium pl-2">
                 {option || `Option ${i + 1}`}
               </span>
             </label>

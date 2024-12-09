@@ -5,10 +5,13 @@ import useCtxState from "../hooks/useCtxState";
 import RednderFormElement from "./RednderFormElement";
 import RenderFormName from "./RenderFormName";
 import Button from "./ui/Button";
+import { useRouter } from "next/navigation";
 
 const RenderForm = () => {
   const state = useCtxState();
   const [sampleAnswers, setSampleAnswers] = useState<string[]>([""]);
+  const router = useRouter();
+  const handleSubmission = () => router.push("/success");
 
   useEffect(() => {
     console.log({ sampleAnswers });
@@ -36,7 +39,11 @@ const RenderForm = () => {
           );
         })}
         <div className="w-full flex justify-end items-center pr-4">
-          <Button variant="primary" className="bg-green-500">
+          <Button
+            variant="primary"
+            className="bg-green-500"
+            onClick={handleSubmission}
+          >
             Submit
           </Button>
         </div>

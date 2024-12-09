@@ -24,7 +24,7 @@ const QuestionDropDownOption = ({
           state?.isQuestionDropDownOpen.activeQuestionIndex as number
         )
       }
-      className=" flex flex-row items-center gap-2"
+      className=" flex flex-row items-center gap-2 cursor-pointer"
     >
       {<Icons name={iconName as IconName} />}
       {!onlyIcon && <p className=" text-sm font-medium">{title}</p>}
