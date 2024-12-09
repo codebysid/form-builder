@@ -15,6 +15,9 @@ export default {
         xDarkGray: "rgba(var(--xDarkGray))",
         xDisable: "rgba(var(--xDisable))",
       },
+      fontFamily: {
+        inter: ["var(--font-inter)"],
+      },
     },
   },
   plugins: [],

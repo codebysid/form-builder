@@ -31,6 +31,15 @@ const RednderFormElement = ({
       <p className="text-sm font-semibold text-black capitalize">{question}</p>
       <p className="text-xs font-normal">{description}</p>
 
+      {type.includes("number") && (
+        <input
+          type="number"
+          value={state[index]}
+          onChange={(e) => handleAnswers(e)}
+          className=" outline-none border rounded-lg text-sm bg-white w-full h-8 text-gray-600 p-1"
+        />
+      )}
+
       {type === "date" && (
         <CustomDatePicker setAnswers={setState} index={index} />
       )}

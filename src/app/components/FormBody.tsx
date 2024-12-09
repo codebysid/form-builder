@@ -29,11 +29,6 @@ const FormBody = () => {
   const dispatch = useDispatch();
   const isMobile = useMobileDevice();
   const sensors = useSensors(
-    useSensor(MouseSensor, {
-      activationConstraint: {
-        distance: 10,
-      },
-    }),
     useSensor(TouchSensor, {
       activationConstraint: {
         delay: 1000,
@@ -48,8 +43,10 @@ const FormBody = () => {
           }),
         ]
       : [
-          useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates,
+          useSensor(MouseSensor, {
+            activationConstraint: {
+              distance: 10,
+            },
           }),
         ])
   );

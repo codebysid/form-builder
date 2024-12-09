@@ -9,3 +9,6 @@
   --xDarkGray: 68, 77, 86;
   --xDisable: 246, 248, 250;
 }
+body {
+  @apply font-inter;
+}
