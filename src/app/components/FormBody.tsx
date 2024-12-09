@@ -10,7 +10,6 @@ import {
   closestCorners,
   DndContext,
   DragEndEvent,
-  KeyboardSensor,
   MouseSensor,
   PointerSensor,
   TouchSensor,
@@ -19,7 +18,6 @@ import {
 } from "@dnd-kit/core";
 import {
   SortableContext,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import useMobileDevice from "../hooks/useMobileDevice";

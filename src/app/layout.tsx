@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 import FormStateProvider from "./context/FormStateProvider";
 import { Inter } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,7 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} antialiased light`}>
-        <FormStateProvider>{children}</FormStateProvider>
+        <SessionProvider>
+          <FormStateProvider>
+            <ToastContainer />
+            {children}
+          </FormStateProvider>
+        </SessionProvider>
       </body>
     </html>
   );
