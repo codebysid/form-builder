@@ -15,7 +15,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         email: user.email,
         name: user.name || "",
       });
-      console.log({ res });
       if (res) return true;
       return false;
     },

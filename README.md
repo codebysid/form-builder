@@ -19,7 +19,6 @@ Live here: [Form Builder](https://form-builder-eta-lyart.vercel.app/)
 
 - Used Context + Reducer hook for state management and not Redux
 - Dnd-kit for rearranging (drag and drop) question types
-- Preview/Publish Form button redirects to review where you can fill out the form like an end user, since public url for forms are under construciton right now
 
 ## Features
 
@@ -32,5 +31,7 @@ Live here: [Form Builder](https://form-builder-eta-lyart.vercel.app/)
   - Date
 - Drag and Drop on desktop/mobile to rearrange questions easily
 - Responsive for desktops/mobile devices
-- Preview and Fill the form
-- Github Auth to authenticate (public form is under construciton)
+- You can also view a table of all your form with "View your forms" button with preview and public url copy button which you can share with anyone
+- Preview button shows a preview just like to an end user
+- Publish Form button saves the form to the Db
+- Github Auth to authenticate and save forms accordingly to the DB

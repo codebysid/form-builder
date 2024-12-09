@@ -2,13 +2,17 @@
 
 import connectToMongo from "@/app/utils/connectToMongo";
 import Form from "@/models/Form";
-import { ObjectId } from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 
-export async function saveForm(formData: string, id: ObjectId) {
-  if (!formData) return;
+export async function saveForm(
+  formData: string,
+  id: ObjectId,
+  formName: string
+) {
+  if (!formData || !formName) return;
   try {
     await connectToMongo();
-    const form = await Form.create({ formData, createdBy: id });
+    const form = await Form.create({ formData, createdBy: id, formName });
     if (!form) throw new Error("unable to save form right now");
     return JSON.parse(
       JSON.stringify({
@@ -23,35 +27,22 @@ export async function saveForm(formData: string, id: ObjectId) {
   }
 }
 
-export async function allForms(id: ObjectId) {
+export async function allForms(id: string) {
   if (!id) return;
   const pipeline: any[] = [
-    {
-      $match: {
-        createdBy: id,
+    [
+      {
+        $match: {
+          createdBy: new mongoose.Types.ObjectId(id),
+        },
       },
-    },
-    {
-      $lookup: {
-        from: "users",
-        localField: "createdBy",
-        foreignField: "email",
-        as: "result",
-      },
-    },
-    {
-      $unwind: {
-        path: "$result",
-        preserveNullAndEmptyArrays: true,
-      },
-    },
-    { $sort: { createdAt: -1 } },
+    ],
   ];
   try {
     await connectToMongo();
     const allForms = await Form.aggregate(pipeline);
     console.log({ allForms });
-    return null;
+    return JSON.parse(JSON.stringify(allForms));
   } catch (err) {
     console.log(err);
   }
@@ -61,6 +52,7 @@ export async function getForm(id: ObjectId) {
   if (!id) return;
   try {
     await connectToMongo();
+    console.log("fetching form");
     const form = await Form.findOne({ _id: id });
     if (!form) return;
     console.log({ form });

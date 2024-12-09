@@ -21,10 +21,15 @@ const FormFooter = () => {
     if (!session?.user?.email) return;
     const data = await getUserId(session?.user?.email);
     if (!data || !data.id) return;
-    const res = await saveForm(JSON.stringify(state?.formElements), data.id);
-    if (res.success) {
+    const res = await saveForm(
+      JSON.stringify(state?.formElements),
+      data.id,
+      state?.formName || "Untitled Form"
+    );
+    console.log({ res });
+    if (res?.success) {
       toast.success(
-        `Form Saved, Share with:${process.env.FRONTEND_URI}/viewForm/${res.id} `,
+        `Form Saved, Click on "View your forms" to view all forms `,
         { position: "top-right" }
       );
       dispatch && dispatch({ type: ACTION_TYPES.RESET_FORM_ELEMENTS });
@@ -49,7 +54,7 @@ const FormFooter = () => {
         variant="primary"
         iconDirection="left"
         className=" whitespace-nowrap"
-        onClick={handleClick}
+        onClick={handleSaveForm}
       >
         Publish Form
       </Button>

@@ -70,16 +70,12 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
         if (i === action.payload.index) {
           return {
             ...ele,
-            ...(action.payload.question
-              ? {
-                  question: action.payload.question,
-                }
-              : { question: "" }),
-            ...(action.payload.description
-              ? {
-                  description: action.payload.description,
-                }
-              : { description: "" }),
+            ...(action.payload.question != undefined && {
+              question: action.payload.question,
+            }),
+            ...(action.payload.description != undefined && {
+              description: action.payload.description,
+            }),
           };
         }
         return ele;
@@ -101,7 +97,7 @@ export function reducer(state: IState, action: { type: string; payload: any }) {
       return { ...state, formElements: newFormElements };
     }
     case ACTION_TYPES.RESET_FORM_ELEMENTS: {
-      return { ...state, formElements: [] };
+      return { ...state, formElements: [], formName: "" };
     }
     default:
       return state;

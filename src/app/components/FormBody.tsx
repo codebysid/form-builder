@@ -21,10 +21,12 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import useMobileDevice from "../hooks/useMobileDevice";
+import { useRouter } from "next/navigation";
 
 const FormBody = () => {
   const state = useCtxState();
   const dispatch = useDispatch();
+  const router = useRouter();
   const isMobile = useMobileDevice();
   const sensors = useSensors(
     useSensor(TouchSensor, {
@@ -69,6 +71,8 @@ const FormBody = () => {
     }
   };
 
+  const handleViewAllForms = () => router.push("/allUserForms");
+
   return (
     <DndContext
       sensors={sensors}
@@ -102,6 +106,9 @@ const FormBody = () => {
               onClick={handleDropDownVisibility}
             >
               Add Question
+            </Button>
+            <Button variant="ghost" onClick={handleViewAllForms}>
+              View your forms
             </Button>
             {state?.isDropDownOpen && <QuestionTypesDropDown />}
           </div>

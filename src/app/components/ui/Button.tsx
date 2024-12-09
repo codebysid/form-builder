@@ -35,7 +35,7 @@ function Button({
     <button
       type={type}
       onClick={onClick}
-      className={`h-[32px] flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-4 rounded-xl outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 ${btnIconStyles[iconDirection]} ${btnVariants[variant]} ${className}`}
+      className={` whitespace-nowrap h-[32px] flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-4 rounded-xl outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 ${btnIconStyles[iconDirection]} ${btnVariants[variant]} ${className}`}
       disabled={disabled}
     >
       {icon && icon}
