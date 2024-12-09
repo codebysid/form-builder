@@ -41,7 +41,6 @@ export async function allForms(id: string) {
   try {
     await connectToMongo();
     const allForms = await Form.aggregate(pipeline);
-    console.log({ allForms });
     return JSON.parse(JSON.stringify(allForms));
   } catch (err) {
     console.log(err);
@@ -52,10 +51,8 @@ export async function getForm(id: ObjectId) {
   if (!id) return;
   try {
     await connectToMongo();
-    console.log("fetching form");
     const form = await Form.findOne({ _id: id });
     if (!form) return;
-    console.log({ form });
     return JSON.parse(JSON.stringify(form));
   } catch (err) {
     console.log(err);

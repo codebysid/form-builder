@@ -26,7 +26,6 @@ const FormFooter = () => {
       data.id,
       state?.formName || "Untitled Form"
     );
-    console.log({ res });
     if (res?.success) {
       toast.success(
         `Form Saved, Click on "View your forms" to view all forms `,

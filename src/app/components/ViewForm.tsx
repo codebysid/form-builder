@@ -20,7 +20,7 @@ const ViewForm = ({ formData }: IViewForm) => {
         sampleAnswers={sampleAnswers}
       />
       <div className="border border-gray-200 w-10/12 lg:w-2/5 h-[92vh] overflow-y-auto flex flex-col justify-start items-center">
-        {formData.map((ele, i) => {
+        {formData.map((ele: any, i: number) => {
           return (
             <RednderFormElement
               key={i}
