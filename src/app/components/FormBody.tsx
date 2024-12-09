@@ -40,16 +40,18 @@ const FormBody = () => {
         tolerance: 5,
       },
     }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
+
     ...(isMobile
       ? [
           useSensor(PointerSensor, {
             activationConstraint: { delay: 100, tolerance: 200 },
           }),
         ]
-      : [])
+      : [
+          useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+          }),
+        ])
   );
 
   const handleDropDownVisibility = () => {
