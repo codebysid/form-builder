@@ -22,11 +22,12 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import useMobileDevice from "../hooks/useMobileDevice";
 
 const FormBody = () => {
   const state = useCtxState();
   const dispatch = useDispatch();
-  const isMobile = window.matchMedia("(pointer: coarse)").matches;
+  const isMobile = useMobileDevice();
   const sensors = useSensors(
     useSensor(MouseSensor, {
       activationConstraint: {
