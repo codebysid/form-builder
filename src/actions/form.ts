@@ -3,16 +3,22 @@
 import connectToMongo from "@/app/utils/connectToMongo";
 import Form from "@/models/Form";
 import mongoose, { ObjectId } from "mongoose";
+import { getUserId } from "./user";
 
-export async function saveForm(
-  formData: string,
-  id: ObjectId,
-  formName: string
-) {
-  if (!formData || !formName) return;
+export async function saveForm(previousState: string, formData: FormData) {
+  const formStateJson = JSON.parse(formData.get("value") as string);
+  const formName = formStateJson.formName;
+  const email = formStateJson.email;
+  const formState = formStateJson.formData;
+  const { id, success } = await getUserId(email as string);
+  if (!formState || !formName || !id || !success) return;
   try {
     await connectToMongo();
-    const form = await Form.create({ formData, createdBy: id, formName });
+    const form = await Form.create({
+      formData: JSON.stringify(formState),
+      createdBy: id,
+      formName,
+    });
     if (!form) throw new Error("unable to save form right now");
     return JSON.parse(
       JSON.stringify({

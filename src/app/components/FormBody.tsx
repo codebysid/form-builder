@@ -22,11 +22,14 @@ import {
 } from "@dnd-kit/sortable";
 import useMobileDevice from "../hooks/useMobileDevice";
 import { useRouter } from "next/navigation";
+import Loader from "./Loader";
+import { useState } from "react";
 
 const FormBody = () => {
   const state = useCtxState();
   const dispatch = useDispatch();
   const router = useRouter();
+  const [fethcingForms, setFetchingForms] = useState<boolean>(false);
   const isMobile = useMobileDevice();
   const sensors = useSensors(
     useSensor(TouchSensor, {
@@ -71,8 +74,13 @@ const FormBody = () => {
     }
   };
 
-  const handleViewAllForms = () => router.push("/allUserForms");
-
+  const handleViewAllForms = () => {
+    setFetchingForms(true);
+    setTimeout(() => {
+      setFetchingForms(false);
+    }, 2000);
+    router.push("/allUserForms");
+  };
   return (
     <DndContext
       sensors={sensors}
@@ -107,7 +115,11 @@ const FormBody = () => {
             >
               Add Question
             </Button>
-            <Button variant="ghost" onClick={handleViewAllForms}>
+            <Button
+              variant="ghost"
+              onClick={handleViewAllForms}
+              icon={fethcingForms && <Loader />}
+            >
               View your forms
             </Button>
             {state?.isDropDownOpen && <QuestionTypesDropDown />}

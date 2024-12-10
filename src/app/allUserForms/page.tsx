@@ -1,8 +1,10 @@
 import { getUserId } from "@/actions/user";
 import { auth } from "../utils/auth";
 import { allForms } from "@/actions/form";
-import DisplayForms from "../components/DisplayForms";
-import { toast } from "react-toastify";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import Loader from "../components/Loader";
+const DisplayForms = dynamic(() => import("../components/DisplayForms"));
 
 const page = async () => {
   const session = await auth();
@@ -12,7 +14,9 @@ const page = async () => {
   const allFormsData = await allForms(userId);
   return (
     <div className="flex flex-col justify-center items-center w-[99vw] lg:w-[95vw]">
-      <DisplayForms allFormsData={allFormsData} />
+      <Suspense fallback={<Loader />}>
+        <DisplayForms allFormsData={allFormsData} />
+      </Suspense>
     </div>
   );
 };

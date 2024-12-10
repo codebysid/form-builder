@@ -1,27 +1,23 @@
 "use client";
-import { useRouter } from "next/navigation";
 import Icons from "./Icons";
 import Button from "./ui/Button";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
+import Link from "next/link";
 
 interface IFormCard {
   formName: string;
   url: string;
 }
 const FormCard = ({ formName, url }: IFormCard) => {
-  const router = useRouter();
-
-  const handlePreview = () => router.push(url);
-
   const handleCopyUrl = () => {
     navigator.clipboard
       .writeText(url)
       .then(() => {
-        toast.success("Copied to Clipbaord", { position: "top-right" });
+        toast.info("Copied to Clipbaord");
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log(err);
-        toast.error("Failed to copy", { position: "top-right" });
+        toast.error("Failed to copy");
       });
   };
 
@@ -34,14 +30,15 @@ const FormCard = ({ formName, url }: IFormCard) => {
         <Button variant="outline" onClick={handleCopyUrl}>
           Copy URL
         </Button>
-        <Button
-          variant="outline"
-          icon={<Icons name="previewIcon" />}
-          iconDirection="right"
-          onClick={handlePreview}
-        >
-          Preview
-        </Button>
+        <Link href={url} target="_blank">
+          <Button
+            variant="outline"
+            icon={<Icons name="previewIcon" />}
+            iconDirection="right"
+          >
+            Preview
+          </Button>
+        </Link>
       </div>
     </div>
   );

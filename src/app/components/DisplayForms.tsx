@@ -1,5 +1,4 @@
-"use client";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import FormCard from "./FormCard";
 import GenerateMoreFormsBtn from "./GenerateMoreFormsBtn";
 
@@ -8,9 +7,7 @@ interface IDisplayForms {
 }
 const DisplayForms = ({ allFormsData }: IDisplayForms) => {
   if (!allFormsData || allFormsData.length < 1) {
-    toast.warn("No forms, create a form first", {
-      position: "top-right",
-    });
+    toast.warning("No forms, create a form first");
   }
   return (
     <div className=" border flex flex-col justify-start gap-10 items-center w-10/12 lg:w-2/5 h-[98vh] px-5 py-5 overflow-y-scroll">
