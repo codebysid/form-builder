@@ -4,7 +4,7 @@ import NextAuth from "next-auth";
 import authConfig from "./app/utils/auth.config";
 
 const { auth } = NextAuth(authConfig);
-const protectedRoutes = ["/", "/renderForm", "/success"];
+const protectedRoutes = ["/", "/renderForm", "/success", "/allUserForms"];
 const userRoutes = ["/home", "/viewForm"];
 
 export default async function middleware(request: NextRequest) {
